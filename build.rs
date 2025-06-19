@@ -33,6 +33,7 @@ fn main() {
         .opaque_type("FILE")
         .blocklist_type("FILE")
         .allowlist_function("ubpf_.+")
+        .allowlist_function("as_external_.+")
         .allowlist_type("ubpf_.+")
         .allowlist_var("ubpf_.+")
         .clang_arg(format!(
