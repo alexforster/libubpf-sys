@@ -9,6 +9,7 @@ SED=$(which gsed || which sed)
 OLD_VERSION="$VERSION.$($GIT -C ./ubpf rev-list --count HEAD)+$($GIT -C ./ubpf rev-parse --short=7 HEAD)"
 $GIT submodule sync --recursive
 $GIT submodule update --init --recursive
+$GIT submodule update --remote
 NEW_VERSION="$VERSION.$($GIT -C ./ubpf rev-list --count HEAD)+$($GIT -C ./ubpf rev-parse --short=7 HEAD)"
 
 if [ "$OLD_VERSION" != "$NEW_VERSION" ]; then
