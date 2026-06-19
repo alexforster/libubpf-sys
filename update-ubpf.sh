@@ -6,10 +6,14 @@ VERSION="0.9"
 GIT=$(which git)
 SED=$(which gsed || which sed)
 
-OLD_VERSION="$VERSION.$($GIT -C ./ubpf rev-list --count HEAD)+$($GIT -C ./ubpf rev-parse --short=7 HEAD)"
-$GIT submodule sync --recursive
 $GIT submodule update --init --recursive
-$GIT submodule update --remote
+OLD_VERSION="$VERSION.$($GIT -C ./ubpf rev-list --count HEAD)+$($GIT -C ./ubpf rev-parse --short=7 HEAD)"
+$GIT submodule deinit -f ./ubpf
+rm -rf ./.git/modules/ubpf
+$GIT rm -f ./ubpf
+$GIT submodule add https://github.com/iovisor/ubpf.git ./ubpf
+$GIT submodule update --init --recursive
+$GIT reset ./ubpf
 NEW_VERSION="$VERSION.$($GIT -C ./ubpf rev-list --count HEAD)+$($GIT -C ./ubpf rev-parse --short=7 HEAD)"
 
 if [ "$OLD_VERSION" != "$NEW_VERSION" ]; then
