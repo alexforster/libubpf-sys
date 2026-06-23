@@ -24,6 +24,13 @@ exclude = [
 github = { repository = "alexforster/libubpf-sys" }
 maintenance = { status = "passively-maintained" }
 
+[features]
+default = []
+# When enabled, the build script ignores the vendored `ubpf/` source and instead
+# builds the ubpf source tree pointed to by the `LIBUBPF_SYS_SOURCE_DIR`
+# environment variable.
+custom-source = []
+
 [build-dependencies]
 bindgen = { version = "^0.71" } # BSD-3-Clause
 cmake = { version = "^0.1" } # MIT OR Apache-2.0
