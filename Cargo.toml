@@ -32,7 +32,7 @@ default = []
 custom-source = []
 
 [build-dependencies]
-bindgen = { version = "^0.71" } # BSD-3-Clause
+bindgen = { version = "0.72.1" } # BSD-3-Clause
 cmake = { version = "^0.1" } # MIT OR Apache-2.0
 
 [lib]
