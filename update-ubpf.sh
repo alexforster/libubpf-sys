@@ -2,7 +2,7 @@
 
 set -eu
 
-VERSION="0.9"
+VERSION="1.0"
 GIT=$(which git)
 SED=$(which gsed || which sed)
 
