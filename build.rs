@@ -34,14 +34,13 @@ fn main() {
         src_dir.join("ubpf")
     };
 
+    #[rustfmt::skip]
     let artifacts_dir = cmake::Config::new(&ubpf_dir)
         .always_configure(true)
         .define("UBPF_SKIP_EXTERNAL", "1")
-        .profile(if cfg!(debug_assertions) {
-            "Debug"
-        } else {
-            "RelWithDebugInfo"
-        })
+        .define("UBPF_DISABLE_RETPOLINES", if cfg!(feature = "disable-retpolines") { "1" } else { "0" })
+        .cflag(format!("-DUBPF_MAX_EXT_FUNCS={}", if cfg!(feature = "1k-helper-functions") { "1024" } else { "64" }))
+        .profile(if cfg!(debug_assertions) { "Debug" } else { "RelWithDebugInfo" })
         .build_target("ubpf")
         .build();
 
